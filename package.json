@@ -1,0 +1,19 @@
+{
+  "name": "imgurjs",
+  "version": "1.0.1",
+  "description": "An Imgur API wrapper.",
+  "homepage": "https://github.com/xbenjii/imgurjs",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:xbenjii/imgurjs.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "xbenjii (Benjamin Fortune) benjamin.fortune1@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "request-promise": "^0.4.0"
+  }
+}
