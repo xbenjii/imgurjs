@@ -1,0 +1,2833 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ImgurJS</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body data-spy="scroll" data-target="#endpoint-nav">
+    <div class="container-fluid">
+        <div class="row">
+            <header id="header">
+                <h1>ImgurJS Documentation</h1>
+            </header>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div id="endpoint-account">
+                    <h1>Account</h1>
+                    <hr>
+                    <div id="account-current" class="panel panel-default panel-body">
+                        <h2>Current Account</h2>
+                        <p>
+                            To make requests for the current account, you may use <code>{username: 'me'}</code>. For example,
+                            <code>imgur.account.images({username:'me', access_token: 'myaccesstoken'})</code> will request all the images for the account that is currently authenticated.
+                        </p>
+                    </div>
+                    <div id="account" class="panel panel-default panel-body">
+                        <h2>Account Base</h2>
+                        <p>
+                            Request standard user information. If you need the username for the account that is logged in, it is returned in the request for an <a href="https://api.imgur.com/oauth2/#token">access token</a>.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td class="header">Method</td>
+                                <td><code>imgur.account.account()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/account">Account</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>username</td>
+                                <td>required</td>
+                                <td>username of the account</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-gallery-favorites" class="panel panel-default panel-body">
+                        <h2>Account Gallery Favorites</h2>
+                        <p>Return the images the user has favorited in the gallery.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td class="header">Method</td>
+                                <td><code>imgur.account.galleryFavorites()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a> OR <a href="https://api.imgur.com/models/gallery_album">Gallery Album</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - allows you to set the page number so you don't have to retrieve all the data at once.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-favorites" class="panel panel-default panel-body">
+                        <h2>Account Favorites</h2>
+                        <p>Returns the users favorited images, only accessible if you're logged in as the user.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.favorites()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a> OR <a href="https://api.imgur.com/models/gallery_album">Gallery Album</a>, Note: vote data ('ups', 'downs', and 'score') may be null if the favorited item hasn't been submitted to gallery</td>
+                            </tr>
+                        </table>
+                                                <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-submissions" class="panel panel-default panel-body">
+                        <h2>Account Submissions</h2>
+                        <p>Return the images a user has submitted to the gallery</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.submissions()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a> OR <a href="https://api.imgur.com/models/gallery_album">Gallery Album</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - allows you to set the page number so you don't have to retrieve all the data at once.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-settings" class="panel panel-default panel-body">
+                        <h2>Account Settings</h2>
+                        <p>Returns the account settings, only accessible if you're logged in as the user.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.settings()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/account_settings">Account Settings</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="update-settings" class="panel panel-default panel-body">
+                        <h2>Change Account Settings</h2>
+                        <p>Updates the account settings for a given user, the user must be logged in.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td class="header">Router</td>
+                                <td><code>imgur.account.changeSettings()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>data</td>
+                                <td>required</td>
+                                <td>
+                                    <table class="table table-bordered">
+                                        <tr class="header">
+                                            <td>Key</td>
+                                            <td>Required</td>
+                                            <td>Description</td>
+                                        </tr>
+                                        <tr>
+                                            <td>bio</td>
+                                            <td>optional</td>
+                                            <td>The biography of the user, is displayed in the gallery profile page.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>public_images</td>
+                                            <td>optional</td>
+                                            <td>Set the users images to private or public by default</td>
+                                        </tr>
+                                        <tr>
+                                            <td>messaging_enabled</td>
+                                            <td>optional</td>
+                                            <td>true | false - Allows the user to enable / disable private messages</td>
+                                        </tr>
+                                        <tr>
+                                            <td>album_privacy</td>
+                                            <td>optional</td>
+                                            <td>public | hidden | secret - Sets the default privacy level of albums the users creates</td>
+                                        </tr>
+                                        <tr>
+                                            <td>accepted_gallery_terms</td>
+                                            <td>optional</td>
+                                            <td>true | false - The user agreement to the Imgur Gallery terms.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>username</td>
+                                            <td>optional</td>
+                                            <td>A valid Imgur username (between 4 and 63 alphanumeric characters)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-profile" class="panel panel-default panel-body">
+                        <h2>Account Gallery Profile</h2>
+                        <p>Returns the totals for the gallery profile.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.galleryProfile()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_profile">Gallery Profile</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-verify-email" class="panel panel-default panel-body">
+                        <h2>Verify User's E-mail</h2>
+                        <p>Checks to see if user has verified their email address</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.verifyEmail()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-send-verify-email" class="panel panel-default panel-body">
+                        <h2>Send Verification E-mail</h2>
+                        <p>Sends an email to the user to verify that their email is valid to upload to gallery. Must be logged in as the user to send.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.sendVerificationEmail()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-albums" class="panel panel-default panel-body">
+                        <h2>Albums</h2>
+                        <p>
+                            Get all the albums associated with the account. Must be logged in as the user to see secret and hidden albums.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.albums()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/album">Album</a></td>
+                            </tr>
+                        </table>
+						<h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - allows you to set the page number so you don't have to retrieve all the data at once.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-album" class="panel panel-default panel-body">
+                        <h2>Album</h2>
+                        <p>
+                            Get additional information about an album, this endpoint works the same as the <a href="album.html">Album Endpoint</a>. You can also use any of the additional routes that are used on an album in the album endpoint.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.album()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/album">Album</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the album</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-album-ids" class="panel panel-default panel-body">
+                        <h2>Album IDs</h2>
+                        <p>Return an array of all of the album IDs.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.albumIds()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - allows you to set the page number so you don't have to retrieve all the data at once.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-album-count" class="panel panel-default panel-body">
+                        <h2>Album Count</h2>
+                        <p>Return the total number of albums associated with the account.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.albumCount()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-album-delete" class="panel panel-default panel-body">
+                        <h2>Album Deletion</h2>
+                        <p>Delete an Album with a given id.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.deleteAlbum()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the album</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-comments" class="panel panel-default panel-body">
+                        <h2>Comments</h2>
+                        <p>Return the comments the user has created.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.comments()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/comment">Comment</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - allows you to set the page number so you don't have to retrieve all the data at once.</td>
+                            </tr>
+                            <tr>
+                                <td>sort</td>
+                                <td>optional</td>
+                                <td>&#39;oldest&#39;, or &#39;newest&#39;. Defaults to &#39;newest&#39;.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-comment" class="panel panel-default panel-body">
+                        <h2>Comment</h2>
+                        <p>
+                            Return information about a specific comment. This endpoint works the same as the <a href="https://api.imgur.com/endpoint/comment/">Comment Endpoint</a>. You can use any of the additional actions that the comment endpoint allows on this end point.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.comment()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/comment">Comment</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the comment</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-comment-ids" class="panel panel-default panel-body">
+                        <h2>Comment IDs</h2>
+                        <p>Return an array of all of the comment IDs.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.commentIds()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - allows you to set the page number so you don't have to retrieve all the data at once.</td>
+                            </tr>
+                            <tr>
+                                <td>sort</td>
+                                <td>optional</td>
+                                <td>&#39;oldest&#39;, or &#39;newest&#39;. Defaults to &#39;newest&#39;.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-comment-count" class="panel panel-default panel-body">
+                        <h2>Comment Count</h2>
+                        <p>Return a count of all of the comments associated with the account.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.commentCount()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-comment-delete" class="panel panel-default panel-body">
+                        <h2>Comment Deletion</h2>
+                        <p>Delete a comment. You are required to be logged in as the user whom created the comment.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.deleteComment()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the comment</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-images" class="panel panel-default panel-body">
+                        <h2>Images</h2>
+                        <p>
+                            Return all of the images associated with the account. You can page through the images by setting the page, this defaults to 0.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.images()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/image">Image</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - allows you to set the page number so you don't have to retrieve all the data at once.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-image" class="panel panel-default panel-body">
+                        <h2>Image</h2>
+                        <p>
+                            Return information about a specific image. This endpoint works the same as the <a href="image/index.html">Image Endpoint</a>. You can use any of the additional actions that the image endpoint with this endpoint.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.image()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/image">Image</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the image</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-image-ids" class="panel panel-default panel-body">
+                        <h2>Image IDs</h2>
+                        <p>
+                            Returns an array of Image IDs that are associated with the account.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.imageIds</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - allows you to set the page number so you don't have to retrieve all the data at once.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-image-count" class="panel panel-default panel-body">
+                        <h2>Image Count</h2>
+                        <p>
+                            Returns the total number of images associated with the account.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.imageCount()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-image-delete" class="panel panel-default panel-body">
+                        <h2>Image Deletion</h2>
+                        <p>Deletes an Image. This requires a delete hash rather than an ID.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.deleteImage()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>deletehash</td>
+                                <td>required</td>
+                                <td>delete hash of the image</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="account-replies" class="panel panel-default panel-body">
+                        <h2>Replies</h2>
+                        <p>Returns all of the reply notifications for the user. Required to be logged in as that user</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.account.replies()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/notification">Notification</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                            	<td>username</td>
+                            	<td>required</td>
+                            	<td>username of the account</td>
+                            </tr>
+                            <tr>
+                                <td>newReplies</td>
+                                <td>optional</td>
+                                <td>boolean - false for all notifications, true for only non-viewed notification. Default is true.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="endpoint-album">
+                    <h1>Album</h1>
+                    <hr>
+                    <div id="album-general" class="panel panel-default panel-body">
+                        <h2>Additional Information</h2>
+                        <p>
+                            There are two methods of sending the image ids, one way is by sending an array of images, this is denoted by []'s. Everywhere you see ids[], it's also an option to send a string of ids that is comma delineated. For example: ids=aaaaa,bbbbb,ccccc is the same as sending ids[]=aaaaa&ids[]=bbbbb&ids[]=ccccc.
+                        </p>
+                    </div>
+                    <div id="album" class="panel panel-default panel-body">
+                        <h2>Album</h2>
+                        <p>Get information about a specific album.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.album.album()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/album">Album</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="album-images" class="panel panel-default panel-body">
+                        <h2>Album Images</h2>
+                        <p>Return all of the images in the album</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.album.images()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/image">Image</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="album-image" class="panel panel-default panel-body">
+                        <h2>Album Image</h2>
+                        <p>
+                            Get information about an image in an album, any additional actions found in <a href="image/index.html">Image
+	                    Endpoint</a> will also work.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.album.image()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/image">Image</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="album-upload" class="panel panel-default panel-body">
+                        <h2>Album Creation</h2>
+                        <p>
+                            Create a new album. Optional parameter of ids[] is an array of image ids to add to the album.
+                            <br/>
+                            <br/> This method is available without authenticating an account, and may be used merely by sending "Authorization: Client-ID {client_id}" in the request headers. Doing so will create an anonymous album which is not tied to an account.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.album.create()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>ids[]</td>
+                                <td>optional</td>
+                                <td>The image ids that you want to be included in the album.</td>
+                            </tr>
+                            <tr>
+                                <td>title</td>
+                                <td>optional</td>
+                                <td>The title of the album</td>
+                            </tr>
+                            <tr>
+                                <td>description</td>
+                                <td>optional</td>
+                                <td>The description of the album</td>
+                            </tr>
+                            <tr>
+                                <td>privacy</td>
+                                <td>optional</td>
+                                <td>Sets the privacy level of the album. Values are : public | hidden | secret</td>
+                            </tr>
+                            <tr>
+                                <td>layout</td>
+                                <td>optional</td>
+                                <td>Sets the layout to display the album. Values are : blog | grid | horizontal | vertical</td>
+                            </tr>
+                            <tr>
+                                <td>cover</td>
+                                <td>optional</td>
+                                <td>The ID of an image that you want to be the cover of the album</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="album-update" class="panel panel-default panel-body">
+                        <h2>Update Album</h2>
+                        <p>
+                            Update the information of an album. For anonymous albums, {album} should be the deletehash that is returned at creation.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.album.update()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>ids[]</td>
+                                <td>optional</td>
+                                <td>The image ids that you want to be included in the album.</td>
+                            </tr>
+                            <tr>
+                                <td>title</td>
+                                <td>optional</td>
+                                <td>The title of the album</td>
+                            </tr>
+                            <tr>
+                                <td>description</td>
+                                <td>optional</td>
+                                <td>The description of the album</td>
+                            </tr>
+                            <tr>
+                                <td>privacy</td>
+                                <td>optional</td>
+                                <td>Sets the privacy level of the album. Values are : public | hidden | secret</td>
+                            </tr>
+                            <tr>
+                                <td>layout</td>
+                                <td>optional</td>
+                                <td>Sets the layout to display the album. Values are : blog | grid | horizontal | vertical</td>
+                            </tr>
+                            <tr>
+                                <td>cover</td>
+                                <td>optional</td>
+                                <td>The ID of an image that you want to be the cover of the album</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="album-delete" class="panel panel-default panel-body">
+                        <h2>Album Deletion</h2>
+                        <p>
+                            Delete an album with a given ID. You are required to be logged in as the user to delete the album. For anonymous albums, {album} should be the deletehash that is returned at creation.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.album.delete()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="album-favorite" class="panel panel-default panel-body">
+                        <h2>Favorite Album</h2>
+                        <p>Favorite an album with a given ID. The user is required to be logged in to favorite the album.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.album.favorite()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="album-set-to" class="panel panel-default panel-body">
+                        <h2>Set Album Images</h2>
+                        <p>
+                            Sets the images for an album, removes all other images and only uses the images in this request. For anonymous albums, {album} should be the deletehash that is returned at creation.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.album.setImages()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>ids[]</td>
+                                <td>required</td>
+                                <td>The image ids that you want to be added to the album.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="album-add-to" class="panel panel-default panel-body">
+                        <h2>Add Images to an Album</h2>
+                        <p>
+                            Takes parameter, ids[], as an array of ids to add to the album. Alternatively, the ids parameter can take a comma delimted string of ids. See below for examples. For anonymous albums, {album} should be the deletehash that is returned at creation.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.album.addImages()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>ids[]</td>
+                                <td>required</td>
+                                <td>The image ids that you want to be added to the album. The [] represents the ability to use this variable as an array.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="album-remove-from" class="panel panel-default panel-body">
+                        <h2>Remove Images from an Album</h2>
+                        <p>
+                            Takes parameter, ids[], as an array of ids and removes from the album. For anonymous albums, {album} should be the deletehash that is returned at creation.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.album.deleteImages()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>ids[]</td>
+                                <td>required</td>
+                                <td>The image ids that you want to be added to the album.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="endpoint-comment">
+                    <h1>Comment</h1>
+                    <hr>
+                    <div id="comment" class="panel panel-default panel-body">
+                        <h2>Comment</h2>
+                        <p>Get information about a specific comment.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.comment.comment()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/comment">Comment</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="comment-create" class="panel panel-default panel-body">
+                        <h2>Comment Creation</h2>
+                        <p>
+                            Creates a new comment, returns the ID of the comment.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.comment.create()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>image_id</td>
+                                <td>required</td>
+                                <td>The ID of the image in the gallery that you wish to comment on</td>
+                            </tr>
+                            <tr>
+                                <td>comment</td>
+                                <td>required</td>
+                                <td>The comment text, this is what will be displayed</td>
+                            </tr>
+                            <tr>
+                                <td>parent_id</td>
+                                <td>optional</td>
+                                <td>The ID of the parent comment, this is an alternative method to create a reply.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="comment-delete" class="panel panel-default panel-body">
+                        <h2>Comment Deletion</h2>
+                        <p>Delete a comment by the given id.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.comment.delete()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="comment-replies" class="panel panel-default panel-body">
+                        <h2>Replies</h2>
+                        <p>Get the comment with all of the replies for the comment.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.comment.replies()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/comment">Comment</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="comment-reply-create" class="panel panel-default panel-body">
+                        <h2>Reply Creation</h2>
+                        <p>Create a reply for the given comment.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.comment.createReply()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>image_id</td>
+                                <td>required</td>
+                                <td>The ID of the image in the gallery that you wish to comment on</td>
+                            </tr>
+                            <tr>
+                                <td>comment</td>
+                                <td>required</td>
+                                <td>The comment text, this is what will be displayed</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="comment-vote" class="panel panel-default panel-body">
+                        <h2>Vote</h2>
+                        <p>
+                            Vote on a comment. The {vote} variable can only be set as "up" or "down".
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.comment.vote()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="comment-report" class="panel panel-default panel-body">
+                        <h2>Report</h2>
+                        <p>Report a comment for being inappropriate.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.comment.report()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="endpoint-conversation">
+                    <h1>Conversation</h1>
+                    <hr>
+                    <div id="conversation-list" class="panel panel-default panel-body">
+                        <h2>Conversation List</h2>
+                        <p>Get list of all conversations for the logged in user.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.conversation.conversations()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td>Array of <a href="https://api.imgur.com/models/conversation">Conversation</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="conversation" class="panel panel-default panel-body">
+                        <h2>Conversation</h2>
+                        <p>Get information about a specific conversation. Includes messages.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.conversation.conversation()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/conversation">Conversation</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>Page of message thread. Starting at 1 for the most recent 25 messages and counting upwards. Defaults to 1</td>
+                            </tr>
+                            <tr>
+                                <td>offset</td>
+                                <td>optional</td>
+                                <td>Additional offset in current page, defaults to 0.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="conversation-message-create" class="panel panel-default panel-body">
+                        <h2>Message Creation</h2>
+                        <p>Create a new message.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.conversation.createMessage()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>recipient</td>
+                                <td>required</td>
+                                <td>The recipient username, this person will receive the message</td>
+                            </tr>
+                            <tr>
+                                <td>body</td>
+                                <td>required</td>
+                                <td>The message itself, similar to the body of an email.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="conversation-message-delete" class="panel panel-default panel-body">
+                        <h2>Conversation Deletion</h2>
+                        <p>Delete a conversation by the given ID.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.conversation.delete()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="conversation-message-report" class="panel panel-default panel-body">
+                        <h2>Report Sender</h2>
+                        <p>Report a user for sending messages that are against the Terms of Service.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.conversation.reportSender()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="conversation-message-block" class="panel panel-default panel-body">
+                        <h2>Block Sender</h2>
+                        <p>Block the user from sending messages to the user that is logged in.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.conversation.blockSender()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="endpoint-custom-gallery">
+                    <h1>Gallery</h1>
+                    <hr>
+                    <div id="custom-gallery" class="panel panel-default panel-body">
+                        <h2>Custom Gallery</h2>
+                        <p>View images for current user's custom gallery</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.customGallery.galleries()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/custom_gallery">Custom Gallery</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>sort</td>
+                                <td>optional</td>
+                                <td>viral | time | top - defaults to viral</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - the data paging number</td>
+                            </tr>
+                            <tr>
+                                <td>window</td>
+                                <td>optional</td>
+                                <td>Change the date range of the request if the sort is "top", day | week | month | year | all, defaults to week</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="filtered-out-gallery" class="panel panel-default panel-body">
+                        <h2>Filtered Out Gallery</h2>
+                        <p>Retrieve user's filtered out gallery</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.customGallery.filtered()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/custom_gallery">Custom Gallery</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>sort</td>
+                                <td>optional</td>
+                                <td>viral | time | top - defaults to viral</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - the data paging number</td>
+                            </tr>
+                            <tr>
+                                <td>window</td>
+                                <td>optional</td>
+                                <td>Change the date range of the request if the sort is "top", day | week | month | year | all, defaults to week</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="custom-gallery-image" class="panel panel-default panel-body">
+                        <h2>Custom Gallery Image</h2>
+                        <p>View a single image in a user's custom gallery</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.customGallery.image()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a> OR <a href="https://api.imgur.com/models/gallery_album">Gallery Album</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>image_id</td>
+                                <td>required</td>
+                                <td>The ID for the gallery item.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="custom-gallery-add" class="panel panel-default panel-body">
+                        <h2>Custom Gallery Add Tags</h2>
+                        <p>Add tags to a user's custom gallery</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.customGallery.addTags()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>tags</td>
+                                <td>required</td>
+                                <td>Array of tags (e.g. 'cats,dogs')</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="custom-gallery-remove" class="panel panel-default panel-body">
+                        <h2>Custom Gallery Remove Tags</h2>
+                        <p>Remove tags from a custom gallery</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.customGallery.removeTags()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>tags</td>
+                                <td>required</td>
+                                <td>Array of tags (e.g. 'cats,dogs')</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="filtered-out-block" class="panel panel-default panel-body">
+                        <h2>Filtered Out Gallery Add</h2>
+                        <p>Filter out a tag</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.customGallery.filteredBlockTag()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>tag</td>
+                                <td>required</td>
+                                <td>Name of the tag to block.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="filtered-out-unblock" class="panel panel-default panel-body">
+                        <h2>Filtered Out Gallery Remove</h2>
+                        <p>Remove a filtered out tag</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.customGallery.filteredUnblockTag()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>tag</td>
+                                <td>required</td>
+                                <td>Name of the tag to unblock.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="endpoint-gallery">
+                    <h1>Gallery</h1>
+                    <hr>
+                    <div class="panel panel-default panel-body">
+                        Due to caching limitations of Imgur, it's not possible to change the result size of the gallery resources.
+                    </div>
+                    <div id="gallery" class="panel panel-default panel-body">
+                        <h2>Gallery</h2>
+                        <p>Returns the images in the gallery. For example the main gallery is <span class="url">https://api.imgur.com/3/gallery/hot/viral/0.json</span></p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.gallery()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a> OR <a href="https://api.imgur.com/models/gallery_album">Gallery Album</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>section</td>
+                                <td>optional</td>
+                                <td>hot | top | user - defaults to hot</td>
+                            </tr>
+                            <tr>
+                                <td>sort</td>
+                                <td>optional</td>
+                                <td>viral | top | time | rising (only available with user section) - defaults to viral</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - the data paging number</td>
+                            </tr>
+                            <tr>
+                                <td>window</td>
+                                <td>optional</td>
+                                <td>Change the date range of the request if the section is "top", day | week | month | year | all, defaults to day</td>
+                            </tr>
+                            <tr>
+                                <td>showViral</td>
+                                <td>optional</td>
+                                <td>true | false - Show or hide viral images from the 'user' section. Defaults to true</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="meme-subgallery" class="panel panel-default panel-body">
+                        <h2>Memes Subgallery</h2>
+                        <p>View images for memes subgallery</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.memes()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Images</a> OR <a href="https://api.imgur.com/models/gallery_album">Gallery Album</a> with <a href="https://api.imgur.com/models/meme_metadata">Meme Metadata</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>sort</td>
+                                <td>optional</td>
+                                <td>viral | time | top - defaults to viral</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - the data paging number</td>
+                            </tr>
+                            <tr>
+                                <td>window</td>
+                                <td>optional</td>
+                                <td>Change the date range of the request if the sort is "top", day | week | month | year | all, defaults to week</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="meme-subgallery-image" class="panel panel-default panel-body">
+                        <h2>Memes Subgallery Image</h2>
+                        <p>View a single image in the memes gallery</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.memeImage()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a> with <a href="https://api.imgur.com/models/meme_metadata">Meme Metadata</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>image_id</td>
+                                <td>required</td>
+                                <td>The ID for the image.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-subreddit" class="panel panel-default panel-body">
+                        <h2>Subreddit Galleries</h2>
+                        <p>View gallery images for a subreddit</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.subreddit()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Images</a> with 'reddit_comments' url</td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>subreddit</td>
+                                <td>required</td>
+                                <td>pics - A valid subreddit name</td>
+                            </tr>
+                            <tr>
+                                <td>sort</td>
+                                <td>optional</td>
+                                <td>time | top - defaults to time</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - the data paging number</td>
+                            </tr>
+                            <tr>
+                                <td>window</td>
+                                <td>optional</td>
+                                <td>Change the date range of the request if the sort is "top", day | week | month | year | all, defaults to week</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-subreddit-image" class="panel panel-default panel-body">
+                        <h2>Subreddit Image</h2>
+                        <p>View a single image in the subreddit</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.subredditImage()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a> with 'reddit_comments' url</td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>subreddit</td>
+                                <td>required</td>
+                                <td>pics - A valid subreddit name</td>
+                            </tr>
+                            <tr>
+                                <td>image_id</td>
+                                <td>required</td>
+                                <td>The ID for the image.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-tag" class="panel panel-default panel-body">
+                        <h2>Gallery Tag</h2>
+                        <p>View images for a gallery tag</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.tag()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/tag">Tag</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>t_name</td>
+                                <td>required</td>
+                                <td>The name of the tag.</td>
+                            </tr>
+                            <tr>
+                                <td>sort</td>
+                                <td>optional</td>
+                                <td>viral | time | top - defaults to viral</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - the data paging number</td>
+                            </tr>
+                            <tr>
+                                <td>window</td>
+                                <td>optional</td>
+                                <td>Change the date range of the request if the sort is "top", day | week | month | year | all, defaults to week</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-tag-image" class="panel panel-default panel-body">
+                        <h2>Gallery Tag Image</h2>
+                        <p>View a single image in a gallery tag</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.tagImage()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>t_name</td>
+                                <td>required</td>
+                                <td>The name of the tag.</td>
+                            </tr>
+                            <tr>
+                                <td>image_id</td>
+                                <td>required</td>
+                                <td>The ID for the image.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-item-tags" class="panel panel-default panel-body">
+                        <h2>Gallery Item Tags</h2>
+                        <p>View tags for a gallery item</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td class="header"></td>
+                                <td><code>imgur.gallery.itemTags()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td>Array of <a href="https://api.imgur.com/models/tag_vote">Tag Votes</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>ID of the gallery item</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-tag-vote" class="panel panel-default panel-body">
+                        <h2>Gallery Tag Voting</h2>
+                        <p>Vote for a tag, 'up' or 'down' vote. Send the same value again to undo a vote.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.tagVote()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>ID of the gallery item</td>
+                            </tr>
+                            <tr>
+                                <td>t_name</td>
+                                <td>required</td>
+                                <td>Name of the tag (implicitly created, if doesn't exist)</td>
+                            </tr>
+                            <tr>
+                                <td>vote</td>
+                                <td>required</td>
+                                <td>'up' or 'down'</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-search" class="panel panel-default panel-body">
+                        <h2>Gallery Search</h2>
+                        <p>Search the gallery with a given query string.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.search()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a> OR <a href="https://api.imgur.com/models/gallery_album">Gallery Album</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>sort</td>
+                                <td>optional</td>
+                                <td>time | viral | top - defaults to time</td>
+                            </tr>
+                            <tr>
+                                <td>window</td>
+                                <td>optional</td>
+                                <td>Change the date range of the request if the sort is 'top', day | week | month | year | all, defaults to all.</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - the data paging number</td>
+                            </tr>
+                        </table>
+                        <span>Simple Search Query Parameters</span>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>q</td>
+                                <td>Query string (note: if advanced search parameters are set, this query string is ignored). This parameter also supports boolean operators (AND, OR, NOT) and indices (tag: user: title: ext: subreddit: album: meme:). An example compound query would be &#39;title: cats AND dogs ext: gif&#39;</td>
+                            </tr>
+                        </table>
+                        <span>Advanced Search Query Parameters</span>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>q_all</td>
+                                <td>Search for all of these words (and)</td>
+                            </tr>
+                            <tr>
+                                <td>q_any</td>
+                                <td>Search for any of these words (or)</td>
+                            </tr>
+                            <tr>
+                                <td>q_exactly </td>
+                                <td>Search for exactly this word or phrase</td>
+                            </tr>
+                            <tr>
+                                <td>q_not</td>
+                                <td>Exclude results matching this</td>
+                            </tr>
+                            <tr>
+                                <td>q_type</td>
+                                <td>Show results for any file type, jpg | png | gif | anigif (animated gif) | album</td>
+                            </tr>
+                            <tr>
+                                <td>q_size_px</td>
+                                <td>Size ranges, small (500 pixels square or less) | med (500 to 2,000 pixels square) | big (2,000 to 5,000 pixels square) | lrg (5,000 to 10,000 pixels square) | huge (10,000 square pixels and above)</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-random" class="panel panel-default panel-body">
+                        <h2>Random Gallery Images</h2>
+                        <p>Returns a random set of gallery images.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.random()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a> OR <a href="https://api.imgur.com/models/gallery_album">Gallery Album</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>A page of random gallery images, from 0-50. Pages are regenerated every hour.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="to-gallery" class="panel panel-default panel-body">
+                        <h2>Publish to Imgur</h2>
+                        <p>Share an Album or Image to the Gallery.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.publish()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>title</td>
+                                <td>required</td>
+                                <td>The title of the image. This is required.</td>
+                            </tr>
+                            <tr>
+                                <td>topic</td>
+                                <td>optional</td>
+                                <td>Topic name</td>
+                            </tr>
+                            <tr>
+                                <td>terms</td>
+                                <td>optional</td>
+                                <td>If the user has not accepted our terms yet, this endpoint will return an error. To by-pass the terms in general simply set this value to 1.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="from-gallery" class="panel panel-default panel-body">
+                        <h2>Remove from Gallery</h2>
+                        <p>Remove an image from the gallery. You must be logged in as the owner of the item to do this action.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.delete()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-album" class="panel panel-default panel-body">
+                        <h2>Album</h2>
+                        <p>Get additional information about an album in the gallery.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.album()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_album">Gallery Album</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-image" class="panel panel-default panel-body">
+                        <h2>Image</h2>
+                        <p>Get additional information about an image in the gallery.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.image()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-reporting" class="panel panel-default panel-body">
+                        <h2>Album / Image Reporting</h2>
+                        <p>Report an Image in the gallery</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td class="header">Route(s)</td>
+                                <td><code>imgur.gallery.report()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-votes" class="panel panel-default panel-body">
+                        <h2>Album / Image Votes</h2>
+                        <p>Get the vote information about an image</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.votes()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/vote">Vote</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-voting" class="panel panel-default panel-body">
+                        <h2>Album / Image Voting</h2>
+                        <p>Vote for an image, 'up' or 'down' vote. Send the same value again to undo a vote.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.vote()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-comments" class="panel panel-default panel-body">
+                        <h2>Album / Image Comments</h2>
+                        <p>Comment on an image in the gallery.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.comments()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/comment">Comment</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>sort</td>
+                                <td>optional</td>
+                                <td>best | top | new - defaults to best </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-comment" class="panel panel-default panel-body">
+                        <h2>Album / Image Comment</h2>
+                        <p>Information about a specific comment. This action also allows any of the additional actions provided in the <a href="comment.html">Comment Endpoint</a>.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.comment()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/comment">Comment</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-comment-creation" class="panel panel-default panel-body">
+                        <h2>Album / Image Comment Creation</h2>
+                        <p>Create a comment for an image.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.createComment()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>comment</td>
+                                <td>required</td>
+                                <td>The text of the comment.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-comment-reply" class="panel panel-default panel-body">
+                        <h2>Album / Image Comment Reply Creation</h2>
+                        <p>Reply to a comment that has been created for an image.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.createCommentReply()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>comment</td>
+                                <td>required</td>
+                                <td>The text you want to use as the reply.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-comment-ids" class="panel panel-default panel-body">
+                        <h2>Album / Image Comment IDs</h2>
+                        <p>List all of the IDs for the comments on an image.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.commentIds()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-comment-count" class="panel panel-default panel-body">
+                        <h2>Album / Image Comment Count</h2>
+                        <p>The number of comments on an Image.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.gallery.commentCount()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="endpoint-image">
+                    <h1>Image</h1>
+                    <hr>
+                    <div id="image" class="panel panel-default panel-body">
+                        <h2>Image</h2>
+                        <p>Get information about an image.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.image.image()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/image">Image</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="image-upload" class="panel panel-default panel-body">
+                        <h2>Image Upload</h2>
+                        <p>Upload a new image.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.image.upload()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>image</td>
+                                <td>required</td>
+                                <td>A binary file, base64 data, or a URL for an image. (up to 10MB)</td>
+                            </tr>
+                            <tr>
+                                <td>album</td>
+                                <td>optional</td>
+                                <td>
+                                    The id of the album you want to add the image to. For anonymous albums, {album} should be the deletehash that is returned at creation.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>type</td>
+                                <td>optional</td>
+                                <td>The type of the file that's being sent; file, base64 or URL</td>
+                            </tr>
+                            <tr>
+                                <td>name</td>
+                                <td>optional</td>
+                                <td>The name of the file, this is automatically detected if uploading a file with a POST and multipart / form-data</td>
+                            </tr>
+                            <tr>
+                                <td>title</td>
+                                <td>optional</td>
+                                <td>The title of the image.</td>
+                            </tr>
+                            <tr>
+                                <td>description</td>
+                                <td>optional</td>
+                                <td>The description of the image.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="image-delete" class="panel panel-default panel-body">
+                        <h2>Image Deletion</h2>
+                        <p>
+                            Deletes an image. For an anonymous image, {id} must be the image's deletehash. If the image belongs to your account then passing the ID of the image is sufficient.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.image.delete()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="image-update" class="panel panel-default panel-body">
+                        <h2>Update Image Information</h2>
+                        <p>
+                            Updates the title or description of an image. You can only update an image you own and is associated with your account. For an anonymous image, {id} must be the image's deletehash.
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.image.update()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>title</td>
+                                <td>optional</td>
+                                <td>The title of the image.</td>
+                            </tr>
+                            <tr>
+                                <td>description</td>
+                                <td>optional</td>
+                                <td>The description of the image.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="image-favorite" class="panel panel-default panel-body">
+                        <h2>Favorite an Image</h2>
+                        <p>Favorite an image with the given ID. The user is required to be logged in to favorite the image.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.image.favorite()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="endpoint-memegen">
+                    <h1>MemeGen</h1>
+                    <hr>
+                    <div class="panel panel-default panel-body">
+                        <p>
+                            It's not yet possible to create memes via the API. If you're interested in this feature then let us know by posting on the
+                            <a href="https://groups.google.com/forum/?fromgroups#!forum/imgur">Imgur API Google Group</a>.
+                        </p>
+                    </div>
+                    <div id="memegen-defaults" class="panel panel-default panel-body">
+                        <h2>Default Memes</h2>
+                        <p>Get the list of default memes.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.memeGen.memeGen()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/image">Image</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="endpoint-notification">
+                    <h1>Notification</h1>
+                    <hr>
+                    <div id="notifications" class="panel panel-default panel-body">
+                        <h2>Notifications</h2>
+                        <p>Get all notifications for the user that's currently logged in</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.notification.notifications()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td>Array of <a href="https://api.imgur.com/models/notification">Notifications</a> keyed under 'messages' and 'replies'.</td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>new</td>
+                                <td>optional</td>
+                                <td>boolean - false for all notifications, true for only non-viewed notification. Default is true.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="notification" class="panel panel-default panel-body">
+                        <h2>Notification</h2>
+                        <p>Returns the data about a specific notification</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.notification.notification()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/notification">Notification</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="notification-viewed" class="panel panel-default panel-body">
+                        <h2>Notification Viewed</h2>
+                        <p>Marks a notification as viewed, this way it no longer shows up in the basic notification request</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.notification.setViewed()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>ids</td>
+                                <td>optional</td>
+                                <td>To mark multiple notifications as read in one call, pass in an 'ids' parameter (omitting the 'id' parameter in the route) with the value of a comma-separated string of notification ids.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="endpoint-oauth">
+                    <h1>Oauth</h1>
+                    <hr>
+                    <div id="oauth-url" class="panel panel-default panel-body">
+                        <h2>OAuth URL</h2>
+                        <p>Returns the URL for the user to visit to authenticate.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.oauth.getOauthUrl()</code></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="oauth-callback" class="panel panel-default panel-body">
+                        <h2>Authorize Callback</h2>
+                        <p>code: is also typically used for desktop or server side applications. It's basically the same as the pin response_type, except rather than displaying the PIN on the screen for the user to copy, it's returned to your application via the redirect URL you specified during registration, in the form of a regular query string parameter. (Keep in mind that you can use localhost as a redirect URL.) For example: http://example.com?code=AUTHORIZATION_CODE
+                        After you have the authorization_code, it must be exchanged for an access_token and refresh_token. It's exchanged by making the following request:</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.oauth.authorizeCallback()</code></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="oauth-refresh" class="panel panel-default panel-body">
+                        <h2>Refresh Token</h2>
+                        <p>If a user has authorized their account but you no longer have a valid access_token for them, then a new one can be generated by using the refresh_token.
+                        When your application receives a refresh token, it is important to store that refresh token for future use. If your application loses the refresh token, you will have to prompt the user for their login information again.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.oauth.refreshToken()</code></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>refresh_token</td>
+                                <td>required</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="endpoint-topic">
+                    <h1>Topic</h1>
+                    <hr>
+                    <div id="topic-defaults" class="panel panel-default panel-body">
+                        <h2>Default Topics</h2>
+                        <p>Get the list of default topics.</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.topic.topics()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/topic">Topic</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-topic" class="panel panel-default panel-body">
+                        <h2>Gallery Topic</h2>
+                        <p>View gallery items for a topic</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.topic.topic()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a> OR <a href="https://api.imgur.com/models/gallery_album">Gallery Album</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>topic_id</td>
+                                <td>required</td>
+                                <td>The ID of the topic.</td>
+                            </tr>
+                            <tr>
+                                <td>sort</td>
+                                <td>optional</td>
+                                <td>viral | time | top - defaults to viral</td>
+                            </tr>
+                            <tr>
+                                <td>page</td>
+                                <td>optional</td>
+                                <td>integer - the data paging number</td>
+                            </tr>
+                            <tr>
+                                <td>window</td>
+                                <td>optional</td>
+                                <td>Change the date range of the request if the sort is "top", day | week | month | year | all, defaults to week</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="gallery-topic-item" class="panel panel-default panel-body">
+                        <h2>Gallery Topic Item</h2>
+                        <p>View a single item in a gallery topic</p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Method</td>
+                                <td><code>imgur.topic.item()</code></td>
+                            </tr>
+                            <tr>
+                                <td class="header">Response Model</td>
+                                <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a> OR <a href="https://api.imgur.com/models/gallery_album">Gallery Album</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>topic_id</td>
+                                <td>required</td>
+                                <td>The ID of the topic.</td>
+                            </tr>
+                            <tr>
+                                <td>item_id</td>
+                                <td>required</td>
+                                <td>The ID for the gallery item.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <nav class="col-md-3 sidebar" id="endpoint-nav">
+                <ul class="nav" data-spy="affix" data-offset-top="300">
+                    <li>
+                        <a href="#endpoint-account">Account</a>
+                        <ul class="nav">
+                            <li><a href="#account-current">Current Account</a></li>
+                            <li><a href="#account">Account Base</a></li>
+                            <li><a href="#account-gallery-favorites">Account Gallery Favorites</a></li>
+                            <li><a href="#account-favorites">Account Favorites</a></li>
+                            <li><a href="#account-submissions">Account Submissions</a></li>
+                            <li><a href="#account-settings">Account Settings</a></li>
+                            <li><a href="#update-settings">Change Account Settings</a></li>
+                            <li><a href="#account-profile">Account Gallery Profile</a></li>
+                            <li><a href="#account-verify-email">Verify User's E-mail</a></li>
+                            <li><a href="#account-send-verify-email">Send Verification E-mail</a></li>
+                            <li><a href="#account-albums">Albums</a></li>
+                            <li><a href="#account-album">Album</a></li>
+                            <li><a href="#account-album-ids">Album IDs</a></li>
+                            <li><a href="#account-album-count">Album Count</a></li>
+                            <li><a href="#account-album-delete">Album Deletion</a></li>
+                            <li><a href="#account-comments">Comments</a></li>
+                            <li><a href="#account-comment">Comment</a></li>
+                            <li><a href="#account-comment-ids">Comment IDs</a></li>
+                            <li><a href="#account-comment-count">Comment Count</a></li>
+                            <li><a href="#account-comment-delete">Comment Deletion</a></li>
+                            <li><a href="#account-images">Images</a></li>
+                            <li><a href="#account-image">Image</a></li>
+                            <li><a href="#account-image-ids">Image IDs</a></li>
+                            <li><a href="#account-image-count">Image Count</a></li>
+                            <li><a href="#account-image-delete">Image Deletion</a></li>
+                            <li><a href="#account-replies">Replies</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#endpoint-album">Album</a>
+                        <ul class="nav">
+                            <li><a href="#album">Album</a></li>
+                            <li><a href="#album-images">Album Images</a></li>
+                            <li><a href="#album-image">Album Image</a></li>
+                            <li><a href="#album-upload">Album Creation</a></li>
+                            <li><a href="#album-update">Update Album</a></li>
+                            <li><a href="#album-delete">Album Deletion</a></li>
+                            <li><a href="#album-favorite">Favorite Album</a></li>
+                            <li><a href="#album-set-to">Set Album Images</a></li>
+                            <li><a href="#album-add-to">Add Images to an Album</a></li>
+                            <li><a href="#album-remove-from">Remove Images from an Album</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#endpoint-comment">Comment</a>
+                        <ul class="nav">
+                            <li><a href="#comment">Comment</a></li>
+                            <li><a href="#comment-create">Comment Creation</a></li>
+                            <li><a href="#comment-delete">Comment Deletion</a></li>
+                            <li><a href="#comment-replies">Replies</a></li>
+                            <li><a href="#comment-replies">Reply Creation</a></li>
+                            <li><a href="#comment-vote">Vote</a></li>
+                            <li><a href="#comment-report">Report</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#endpoint-conversation">Conversation</a>
+                        <ul class="nav">
+                            <li><a href="#conversation-list">Conversation List</a></li>
+                            <li><a href="#conversation">Conversation</a></li>
+                            <li><a href="#conversation-message-create">Message Creation</a></li>
+                            <li><a href="#conversation-message-delete">Delete Conversation</a></li>
+                            <li><a href="#conversation-message-report">Report Sender</a></li>
+                            <li><a href="#conversation-message-block">Block Sender</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#endpoint-custom-gallery">Custom Gallery</a>
+                        <ul class="nav">
+                            <li><a href="#custom-gallery">Custom Gallery</a></li>
+                            <li><a href="#filtered-out-gallery">Filtered Out Gallery</a></li>
+                            <li><a href="#custom-gallery-image">Custom Gallery Image</a></li>
+                            <li><a href="#custom-gallery-add">Add Tags</a></li>
+                            <li><a href="#custom-gallery-remove">Remove Tags</a></li>
+                            <li><a href="#filtered-out-block">Filtered Out Gallery Add</a></li>
+                            <li><a href="#filtered-out-unblock">Filtered Out Gallery Remove</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#endpoint-gallery">Gallery</a>
+                        <ul class="nav">
+                            <li><a href="#gallery">Gallery</a></li>
+                            <li><a href="#meme-subgallery">Memes Subgallery</a></li>
+                            <li><a href="#meme-subgallery-image">Memes Subgallery Image</a></li>
+                            <li><a href="#gallery-subreddit">Subreddit Galleries</a></li>
+                            <li><a href="#gallery-subreddit-image">Subreddit Image</a></li>
+                            <li><a href="#gallery-tag">Gallery Tag</a></li>
+                            <li><a href="#gallery-tag-image">Gallery Tag Image</a></li>
+                            <li><a href="#gallery-item-tags">Gallery Item Tags</a></li>
+                            <li><a href="#gallery-tag-vote">Gallery Tag Voting</a></li>
+                            <li><a href="#gallery-search">Gallery Search</a></li>
+                            <li><a href="#gallery-random">Random Gallery Images</a></li>
+                            <li><a href="#to-gallery">Publish to Imgur</a></li>
+                            <li><a href="#from-gallery">Remove from Gallery</a></li>
+                            <li><a href="#gallery-album">Album</a></li>
+                            <li><a href="#gallery-image">Image</a></li>
+                            <li><a href="#gallery-reporting">Album / Image Reporting</a></li>
+                            <li><a href="#gallery-votes">Album / Image Votes</a></li>
+                            <li><a href="#gallery-voting">Album / Image Voting</a></li>
+                            <li><a href="#gallery-comments">Album / Image Comments</a></li>
+                            <li><a href="#gallery-comment">Album / Image Comment</a></li>
+                            <li><a href="#gallery-comment-creation">Album / Image Comment Creation</a></li>
+                            <li><a href="#gallery-comment-reply">Album / Image Comment Reply</a></li>
+                            <li><a href="#gallery-comment-ids">Album / Image Comment IDs</a></li>
+                            <li><a href="#gallery-comment-count">Album / Image Comment Count</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#endpoint-image">Image</a>
+                        <ul class="nav">
+                            <li><a href="#image">Image</a></li>
+                            <li><a href="#image-upload">Image Upload</a></li>
+                            <li><a href="#image-delete">Image Deletion</a></li>
+                            <li><a href="#image-update">Image Update Information</a></li>
+                            <li><a href="#image-favorite">Favorite an Image</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#endpoint-memegen">Memegen</a>
+                        <ul class="nav">
+                            <li><a href="#defaults">Default Memes</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#endpoint-notification">Notification</a>
+                        <ul class="nav">
+                            <li><a href="#notifications">Notifications</a></li>
+                            <li><a href="#notification">Notification</a></li>
+                            <li><a href="#notification-viewed">Notification Viewed</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#endpoint-oauth">OAuth</a>
+                        <ul class="nav">
+                            <li><a href="#oauth-url">OAuth URL</a></li>
+                            <li><a href="#oauth-callback">Callback</a></li>
+                            <li><a href="#oauth-refresh">Refresh Token</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#endpoint-topic">Topic</a>
+                        <ul class="nav">
+                            <li><a href="#topic-defaults">Default Topics</a></li>
+                            <li><a href="#gallery-topic">Gallery Topic</a></li>
+                            <li><a href="#gallery-topic-item">Gallery Topic Item</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="https://api.imgur.com/models">Responses</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="footer"></div>
+        </div>
+    </div>
+    <script src="js/jQuery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+/*
+ * Base structure
+ */
+/* Move down content because we have a fixed navbar that is 50px tall */
+
+header {
+    height: 300px;
+    padding: 60px;
+    background: #333;
+    color: white;
+}
+/*
+ * Main content
+ */
+
+.main {
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .main {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+}
+
+.main .page-header {
+    margin-top: 0;
+}
+
+.sidebar .nav > li > a {
+    display: block;
+    color: #716b7a;
+    padding: 5px 20px;
+}
+
+.sidebar .nav > li > a:hover,
+.sidebar .nav > li > a:focus {
+    text-decoration: none;
+    background-color: #e5e3e9;
+}
+
+.sidebar .nav > .active > a,
+.sidebar .nav > .active:hover > a,
+.sidebar .nav > .active:focus > a {
+    font-weight: bold;
+    color: #563d7c;
+    background-color: transparent;
+}
+/* Nav: second level */
+
+.sidebar .nav .nav {
+    display: none;
+}
+
+.sidebar .nav > li.active .nav {
+    display: block;
+}
+
+.sidebar .nav .nav {
+    margin-bottom: 8px;
+}
+
+.sidebar .nav .nav > li > a {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 30px;
+    font-size: 90%;
+}
+
+.sidenav {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #f7f5fa;
+    border-radius: 5px;
+}
+
+ul.affix {
+    position: fixed;
+    top: 0;
+    right: 62px;
+    width: 360px;
+}
+
+ul.affix-top {
+    position: static;
+}
+
+ul.affix-bottom {
+    position: absolute;
+}
+
+.panel-danger {
+    background-color: #ebccd1;
+}
