@@ -1,6 +1,10 @@
 # imgurjs
 A wrapper for the Imgur API written in JavaScript. All methods take advantage of Promises.
 
+## Installation
+
+    npm install --save imgurjs
+
 ## Instantiation
     var Imgur = require('imgurjs');
     var imgur = new Imgur({
