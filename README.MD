@@ -44,4 +44,36 @@ A wrapper for the Imgur API written in JavaScript. All methods take advantage of
         });
     });
 
+## Uploading image example
+
+    fs.readFile('./myImage.png', function(err, data) {
+        imgur.image.upload({
+            file: data
+        }).then(function(response) {
+            console.log(response);
+        }).catch(function(error) {
+            console.log(error);
+        });
+    });
+
+##### Also accepts a stream
+
+    imgur.image.upload({
+        file: fs.createReadStream('./myImage.png')
+    }).then(function(response) {
+        console.log(response);
+    }).catch(function(error) {
+        console.log(error);
+    });
+
+##### And a URL
+
+    imgur.image.upload({
+        file: 'http://mysite.com/myImage.png'
+    }).then(function(response) {
+        console.log(response);
+    }).catch(function(error) {
+        console.log(error);
+    });
+
 Full documentation is available at [https://xbenjii.github.io/imgurjs](https://xbenjii.github.io/imgurjs)
