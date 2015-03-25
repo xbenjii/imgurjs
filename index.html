@@ -852,7 +852,7 @@
                     <div id="album-general" class="panel panel-default panel-body">
                         <h2>Additional Information</h2>
                         <p>
-                            Everywhere you see <code>ids[]</code>, you can pass the data either as an array <code>{ids: [1,2]}</code> or you can send a string of ids that is comma delimited <code>{ids: '1,2,3,4'}</code>.
+                            Everywhere you see <code>ids[]</code>, you need to pass the data as an array <code>{ids: [1,2]}</code>.
                         </p>
                     </div>
                     <div id="album" class="panel panel-default panel-body">
@@ -1036,34 +1036,52 @@
                                 <td>Description</td>
                             </tr>
                             <tr>
-                                <td>ids[]</td>
-                                <td>optional</td>
-                                <td>The image ids that you want to be included in the album.</td>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the album</td>
                             </tr>
                             <tr>
-                                <td>title</td>
-                                <td>optional</td>
-                                <td>The title of the album</td>
-                            </tr>
-                            <tr>
-                                <td>description</td>
-                                <td>optional</td>
-                                <td>The description of the album</td>
-                            </tr>
-                            <tr>
-                                <td>privacy</td>
-                                <td>optional</td>
-                                <td>Sets the privacy level of the album. Values are : public | hidden | secret</td>
-                            </tr>
-                            <tr>
-                                <td>layout</td>
-                                <td>optional</td>
-                                <td>Sets the layout to display the album. Values are : blog | grid | horizontal | vertical</td>
-                            </tr>
-                            <tr>
-                                <td>cover</td>
-                                <td>optional</td>
-                                <td>The ID of an image that you want to be the cover of the album</td>
+                                <td>data</td>
+                                <td>required</td>
+                                <td>
+                                    <table class="table table-bordered">
+                                        <tr class="header">
+                                            <td>Key</td>
+                                            <td>Required</td>
+                                            <td>Description</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ids[]</td>
+                                            <td>optional</td>
+                                            <td>The image ids that you want to be included in the album.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>title</td>
+                                            <td>optional</td>
+                                            <td>The title of the album</td>
+                                        </tr>
+                                        <tr>
+                                            <td>description</td>
+                                            <td>optional</td>
+                                            <td>The description of the album</td>
+                                        </tr>
+                                        <tr>
+                                            <td>privacy</td>
+                                            <td>optional</td>
+                                            <td>Sets the privacy level of the album. Values are : public | hidden | secret</td>
+                                        </tr>
+                                        <tr>
+                                            <td>layout</td>
+                                            <td>optional</td>
+                                            <td>Sets the layout to display the album. Values are : blog | grid | horizontal | vertical</td>
+                                        </tr>
+                                        <tr>
+                                            <td>cover</td>
+                                            <td>optional</td>
+                                            <td>The ID of an image that you want to be the cover of the album</td>
+                                        </tr>
+                                    </table>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -1082,6 +1100,19 @@
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
                             </tr>
                         </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the album</td>
+                            </tr>
+                        </table>
                     </div>
                     <div id="album-favorite" class="panel panel-default panel-body">
                         <h2>Favorite Album</h2>
@@ -1096,11 +1127,24 @@
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
                             </tr>
                         </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the album</td>
+                            </tr>
+                        </table>
                     </div>
                     <div id="album-set-to" class="panel panel-default panel-body">
                         <h2>Set Album Images</h2>
                         <p>
-                            Sets the images for an album, removes all other images and only uses the images in this request. For anonymous albums, {album} should be the deletehash that is returned at creation.
+                            Sets the images for an album, removes all other images and only uses the images in this request. For anonymous albums, <code>album_id</code> should be the deletehash that is returned at creation.
                         </p>
                         <table class="table table-bordered">
                             <tr>
@@ -1120,7 +1164,12 @@
                                 <td>Description</td>
                             </tr>
                             <tr>
-                                <td>ids[]</td>
+                                <td>album_id</td>
+                                <td>required</td>
+                                <td>id of the album</td>
+                            </tr>
+                            <tr>
+                                <td>image_ids[]</td>
                                 <td>required</td>
                                 <td>The image ids that you want to be added to the album.</td>
                             </tr>
@@ -1129,7 +1178,7 @@
                     <div id="album-add-to" class="panel panel-default panel-body">
                         <h2>Add Images to an Album</h2>
                         <p>
-                            Takes parameter, ids[], as an array of ids to add to the album. Alternatively, the ids parameter can take a comma delimted string of ids. See below for examples. For anonymous albums, {album} should be the deletehash that is returned at creation.
+                            Takes parameter, ids[], as an array of ids to add to the album. Alternatively, the ids parameter can take a comma delimted string of ids. See below for examples. For anonymous albums, <code>album_id</code> should be the deletehash that is returned at creation.
                         </p>
                         <table class="table table-bordered">
                             <tr>
@@ -1149,9 +1198,14 @@
                                 <td>Description</td>
                             </tr>
                             <tr>
-                                <td>ids[]</td>
+                                <td>album_id</td>
                                 <td>required</td>
-                                <td>The image ids that you want to be added to the album. The [] represents the ability to use this variable as an array.</td>
+                                <td>id of the album</td>
+                            </tr>
+                            <tr>
+                                <td>image_ids[]</td>
+                                <td>required</td>
+                                <td>The image ids that you want to be added to the album.</td>
                             </tr>
                         </table>
                     </div>
@@ -1178,7 +1232,12 @@
                                 <td>Description</td>
                             </tr>
                             <tr>
-                                <td>ids[]</td>
+                                <td>album_id</td>
+                                <td>required</td>
+                                <td>id of the album</td>
+                            </tr>
+                            <tr>
+                                <td>image_ids[]</td>
                                 <td>required</td>
                                 <td>The image ids that you want to be added to the album.</td>
                             </tr>
@@ -1199,6 +1258,19 @@
                             <tr>
                                 <td class="header">Response Model</td>
                                 <td><a href="https://api.imgur.com/models/comment">Comment</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the comment</td>
                             </tr>
                         </table>
                     </div>
@@ -1254,6 +1326,19 @@
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
                             </tr>
                         </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the comment</td>
+                            </tr>
+                        </table>
                     </div>
                     <div id="comment-replies" class="panel panel-default panel-body">
                         <h2>Replies</h2>
@@ -1266,6 +1351,19 @@
                             <tr>
                                 <td class="header">Response Model</td>
                                 <td><a href="https://api.imgur.com/models/comment">Comment</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the comment</td>
                             </tr>
                         </table>
                     </div>
@@ -1288,6 +1386,11 @@
                                 <td>Key</td>
                                 <td>Required</td>
                                 <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>comment_id</td>
+                                <td>required</td>
+                                <td>id of the comment</td>
                             </tr>
                             <tr>
                                 <td>image_id</td>
@@ -1316,6 +1419,24 @@
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
                             </tr>
                         </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the comment</td>
+                            </tr>
+                            <tr>
+                                <td>vote</td>
+                                <td>required</td>
+                                <td>"up" or "down"</td>
+                            </tr>
+                        </table>
                     </div>
                     <div id="comment-report" class="panel panel-default panel-body">
                         <h2>Report</h2>
@@ -1328,6 +1449,19 @@
                             <tr>
                                 <td class="header">Response Model</td>
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the comment</td>
                             </tr>
                         </table>
                     </div>
@@ -1368,6 +1502,11 @@
                                 <td>Key</td>
                                 <td>Required</td>
                                 <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the conversation</td>
                             </tr>
                             <tr>
                                 <td>page</td>
@@ -1426,6 +1565,19 @@
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
                             </tr>
                         </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the conversation</td>
+                            </tr>
+                        </table>
                     </div>
                     <div id="conversation-message-report" class="panel panel-default panel-body">
                         <h2>Report Sender</h2>
@@ -1440,6 +1592,19 @@
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
                             </tr>
                         </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>username</td>
+                                <td>required</td>
+                                <td>username of the account</td>
+                            </tr>
+                        </table>
                     </div>
                     <div id="conversation-message-block" class="panel panel-default panel-body">
                         <h2>Block Sender</h2>
@@ -1452,6 +1617,19 @@
                             <tr>
                                 <td class="header">Response Model</td>
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Description</td>
+                            </tr>
+                            <tr>
+                                <td>username</td>
+                                <td>required</td>
+                                <td>username of the account</td>
                             </tr>
                         </table>
                     </div>
@@ -1554,7 +1732,7 @@
                                 <td>Value</td>
                             </tr>
                             <tr>
-                                <td>image_id</td>
+                                <td>id</td>
                                 <td>required</td>
                                 <td>The ID for the gallery item.</td>
                             </tr>
@@ -1581,7 +1759,7 @@
                                 <td>Value</td>
                             </tr>
                             <tr>
-                                <td>tags</td>
+                                <td>tags[]</td>
                                 <td>required</td>
                                 <td>Array of tags (e.g. 'cats,dogs')</td>
                             </tr>
@@ -1608,7 +1786,7 @@
                                 <td>Value</td>
                             </tr>
                             <tr>
-                                <td>tags</td>
+                                <td>tags[]</td>
                                 <td>required</td>
                                 <td>Array of tags (e.g. 'cats,dogs')</td>
                             </tr>
@@ -1780,7 +1958,7 @@
                                 <td>Value</td>
                             </tr>
                             <tr>
-                                <td>image_id</td>
+                                <td>id</td>
                                 <td>required</td>
                                 <td>The ID for the image.</td>
                             </tr>
@@ -2052,28 +2230,39 @@
                                 <td>Value</td>
                             </tr>
                             <tr>
-                                <td>q_all</td>
-                                <td>Search for all of these words (and)</td>
-                            </tr>
-                            <tr>
-                                <td>q_any</td>
-                                <td>Search for any of these words (or)</td>
-                            </tr>
-                            <tr>
-                                <td>q_exactly </td>
-                                <td>Search for exactly this word or phrase</td>
-                            </tr>
-                            <tr>
-                                <td>q_not</td>
-                                <td>Exclude results matching this</td>
-                            </tr>
-                            <tr>
-                                <td>q_type</td>
-                                <td>Show results for any file type, jpg | png | gif | anigif (animated gif) | album</td>
-                            </tr>
-                            <tr>
-                                <td>q_size_px</td>
-                                <td>Size ranges, small (500 pixels square or less) | med (500 to 2,000 pixels square) | big (2,000 to 5,000 pixels square) | lrg (5,000 to 10,000 pixels square) | huge (10,000 square pixels and above)</td>
+                                <td>q</td>
+                                <td>
+                                    <table class="table table-bordered">
+                                        <tr class="header">
+                                            <td>Key</td>
+                                            <td>Value</td>
+                                        </tr>
+                                        <tr>
+                                            <td>q_all</td>
+                                            <td>Search for all of these words (and)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>q_any</td>
+                                            <td>Search for any of these words (or)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>q_exactly </td>
+                                            <td>Search for exactly this word or phrase</td>
+                                        </tr>
+                                        <tr>
+                                            <td>q_not</td>
+                                            <td>Exclude results matching this</td>
+                                        </tr>
+                                        <tr>
+                                            <td>q_type</td>
+                                            <td>Show results for any file type, jpg | png | gif | anigif (animated gif) | album</td>
+                                        </tr>
+                                        <tr>
+                                            <td>q_size_px</td>
+                                            <td>Size ranges, small (500 pixels square or less) | med (500 to 2,000 pixels square) | big (2,000 to 5,000 pixels square) | lrg (5,000 to 10,000 pixels square) | huge (10,000 square pixels and above)</td>
+                                        </tr>
+                                    </table>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -2125,6 +2314,11 @@
                                 <td>Value</td>
                             </tr>
                             <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of album or image</td>
+                            </tr>
+                            <tr>
                                 <td>title</td>
                                 <td>required</td>
                                 <td>The title of the image. This is required.</td>
@@ -2154,6 +2348,19 @@
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
                             </tr>
                         </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of album or image</td>
+                            </tr>
+                        </table>
                     </div>
                     <div id="gallery-album" class="panel panel-default panel-body">
                         <h2>Album</h2>
@@ -2166,6 +2373,19 @@
                             <tr>
                                 <td class="header">Response Model</td>
                                 <td><a href="https://api.imgur.com/models/gallery_album">Gallery Album</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of album</td>
                             </tr>
                         </table>
                     </div>
@@ -2182,6 +2402,19 @@
                                 <td><a href="https://api.imgur.com/models/gallery_image">Gallery Image</a></td>
                             </tr>
                         </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of image</td>
+                            </tr>
+                        </table>
                     </div>
                     <div id="gallery-reporting" class="panel panel-default panel-body">
                         <h2>Album / Image Reporting</h2>
@@ -2194,6 +2427,19 @@
                             <tr>
                                 <td class="header">Response Model</td>
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of album or image</td>
                             </tr>
                         </table>
                     </div>
@@ -2210,6 +2456,19 @@
                                 <td><a href="https://api.imgur.com/models/vote">Vote</a></td>
                             </tr>
                         </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of album or image</td>
+                            </tr>
+                        </table>
                     </div>
                     <div id="gallery-voting" class="panel panel-default panel-body">
                         <h2>Album / Image Voting</h2>
@@ -2222,6 +2481,24 @@
                             <tr>
                                 <td class="header">Response Model</td>
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of album or image</td>
+                            </tr>
+                            <tr>
+                                <td>vote</td>
+                                <td>required</td>
+                                <td>"up" or "down"</td>
                             </tr>
                         </table>
                     </div>
@@ -2246,6 +2523,11 @@
                                 <td>Value</td>
                             </tr>
                             <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of album or image</td>
+                            </tr>
+                            <tr>
                                 <td>sort</td>
                                 <td>optional</td>
                                 <td>best | top | new - defaults to best </td>
@@ -2263,6 +2545,24 @@
                             <tr>
                                 <td class="header">Response Model</td>
                                 <td><a href="https://api.imgur.com/models/comment">Comment</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the album or image</td>
+                            </tr>
+                            <tr>
+                                <td>comment_id</td>
+                                <td>required</td>
+                                <td>id of the comment</td>
                             </tr>
                         </table>
                     </div>
@@ -2285,6 +2585,11 @@
                                 <td>Key</td>
                                 <td>Required</td>
                                 <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the album or image</td>
                             </tr>
                             <tr>
                                 <td>comment</td>
@@ -2313,6 +2618,17 @@
                                 <td>Required</td>
                                 <td>Value</td>
                             </tr>
+                            <h4>Parameters</h4>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of album or image</td>
+                            </tr>
+                            <tr>
+                                <td>comment_id</td>
+                                <td>required</td>
+                                <td>id of the comment</td>
+                            </tr>
                             <tr>
                                 <td>comment</td>
                                 <td>required</td>
@@ -2333,6 +2649,19 @@
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
                             </tr>
                         </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of album or image</td>
+                            </tr>
+                        </table>
                     </div>
                     <div id="gallery-comment-count" class="panel panel-default panel-body">
                         <h2>Album / Image Comment Count</h2>
@@ -2345,6 +2674,19 @@
                             <tr>
                                 <td class="header">Response Model</td>
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>sort</td>
+                                <td>optional</td>
+                                <td>best | top | new - defaults to best </td>
                             </tr>
                         </table>
                     </div>
@@ -2363,6 +2705,19 @@
                             <tr>
                                 <td class="header">Response Model</td>
                                 <td><a href="https://api.imgur.com/models/image">Image</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the image</td>
                             </tr>
                         </table>
                     </div>
@@ -2387,9 +2742,9 @@
                                 <td>Description</td>
                             </tr>
                             <tr>
-                                <td>image</td>
+                                <td>file</td>
                                 <td>required</td>
-                                <td>A binary file, base64 data, or a URL for an image. (up to 10MB)</td>
+                                <td>A binary file, base64 data, or a URL for an image. (up to 10MB) EG:<code>imgur.image.upload({file: fs.createReadStream('myImage.png')})</code></td>
                             </tr>
                             <tr>
                                 <td>album</td>
@@ -2423,7 +2778,7 @@
                     <div id="image-delete" class="panel panel-default panel-body">
                         <h2>Image Deletion</h2>
                         <p>
-                            Deletes an image. For an anonymous image, {id} must be the image's deletehash. If the image belongs to your account then passing the ID of the image is sufficient.
+                            Deletes an image. For an anonymous image, <code>id</code> must be the image's deletehash. If the image belongs to your account then passing the ID of the image is sufficient.
                         </p>
                         <table class="table table-bordered">
                             <tr>
@@ -2433,6 +2788,19 @@
                             <tr>
                                 <td class="header">Response Model</td>
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the image</td>
                             </tr>
                         </table>
                     </div>
@@ -2456,17 +2824,35 @@
                             <tr class="header">
                                 <td>Key</td>
                                 <td>Required</td>
-                                <td>Description</td>
+                                <td>Value</td>
                             </tr>
                             <tr>
-                                <td>title</td>
-                                <td>optional</td>
-                                <td>The title of the image.</td>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the image</td>
                             </tr>
                             <tr>
-                                <td>description</td>
-                                <td>optional</td>
-                                <td>The description of the image.</td>
+                                <td>data</td>
+                                <td>required</td>
+                                <td>
+                                    <table class="table table-bordered">
+                                        <tr class="header">
+                                            <td>Key</td>
+                                            <td>Required</td>
+                                            <td>Description</td>
+                                        </tr>
+                                        <tr>
+                                            <td>title</td>
+                                            <td>optional</td>
+                                            <td>The title of the image.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>description</td>
+                                            <td>optional</td>
+                                            <td>The description of the image.</td>
+                                        </tr>
+                                    </table>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -2481,6 +2867,19 @@
                             <tr>
                                 <td class="header">Response Model</td>
                                 <td><a href="https://api.imgur.com/models/basic">Basic</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the image</td>
                             </tr>
                         </table>
                     </div>
@@ -2533,7 +2932,7 @@
                                 <td>Value</td>
                             </tr>
                             <tr>
-                                <td>new</td>
+                                <td>newReplies</td>
                                 <td>optional</td>
                                 <td>boolean - false for all notifications, true for only non-viewed notification. Default is true.</td>
                             </tr>
@@ -2550,6 +2949,19 @@
                             <tr>
                                 <td class="header">Response Model</td>
                                 <td><a href="https://api.imgur.com/models/notification">Notification</a></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>required</td>
+                                <td>id of the notification</td>
                             </tr>
                         </table>
                     </div>
@@ -2574,7 +2986,7 @@
                                 <td>Value</td>
                             </tr>
                             <tr>
-                                <td>ids</td>
+                                <td>ids[]</td>
                                 <td>optional</td>
                                 <td>To mark multiple notifications as read in one call, pass in an 'ids' parameter (omitting the 'id' parameter in the route) with the value of a comma-separated string of notification ids.</td>
                             </tr>
@@ -2596,11 +3008,24 @@
                     </div>
                     <div id="oauth-callback" class="panel panel-default panel-body">
                         <h2>Authorize Callback</h2>
-                        <p>code: is also typically used for desktop or server side applications. It's basically the same as the pin response_type, except rather than displaying the PIN on the screen for the user to copy, it's returned to your application via the redirect URL you specified during registration, in the form of a regular query string parameter. (Keep in mind that you can use localhost as a redirect URL.) For example: http://example.com?code=AUTHORIZATION_CODE After you have the authorization_code, it must be exchanged for an access_token and refresh_token. It's exchanged by making the following request:</p>
+                        <p>Returned to your application via the redirect URL you specified during registration, in the form of a regular query string parameter. (Keep in mind that you can use localhost as a redirect URL.) For example: http://example.com?code=AUTHORIZATION_CODE After you have the authorization_code, it must be exchanged for an access_token and refresh_token.</p>
                         <table class="table table-bordered">
                             <tr>
                                 <td>Method</td>
                                 <td><code>imgur.oauth.authorizeCallback()</code></td>
+                            </tr>
+                        </table>
+                        <h4>Parameters</h4>
+                        <table class="table table-bordered">
+                            <tr class="header">
+                                <td>Key</td>
+                                <td>Required</td>
+                                <td>Value</td>
+                            </tr>
+                            <tr>
+                                <td>authToken</td>
+                                <td>required</td>
+                                <td></td>
                             </tr>
                         </table>
                     </div>
@@ -2621,7 +3046,7 @@
                                 <td>Value</td>
                             </tr>
                             <tr>
-                                <td>refresh_token</td>
+                                <td>refreshToken</td>
                                 <td>required</td>
                                 <td></td>
                             </tr>
@@ -2666,7 +3091,7 @@
                                 <td>Value</td>
                             </tr>
                             <tr>
-                                <td>topic_id</td>
+                                <td>id</td>
                                 <td>required</td>
                                 <td>The ID of the topic.</td>
                             </tr>
