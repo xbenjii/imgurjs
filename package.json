@@ -1,6 +1,6 @@
 {
   "name": "imgurjs",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "An Imgur API wrapper.",
   "homepage": "https://github.com/xbenjii/imgurjs",
   "repository": {
