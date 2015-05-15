@@ -30,14 +30,14 @@ A wrapper for the Imgur API written in JavaScript. All methods take advantage of
         res.redirect(imgur.oauth.getOauthUrl());
     });
 
-    router.get('/loginCallback', function(req, res, next) {
+    router.get('/logincallback', function(req, res, next) {
         imgur.oauth.authorizeCallback(req.query.code).then(function(user) {
             req.session.user = user;
             res.redirect('/');
         });
     });
 
-    router.get('./refreshsession', function(req, res, next) {
+    router.get('/refreshsession', function(req, res, next) {
         imgur.oauth.refreshToken(req.session.user.refresh_token).then(function(user) {
             req.session.user = user;
             res.redirect('/');
